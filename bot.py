@@ -25,6 +25,14 @@ def post(client, message):
                 InlineKeyboardButton('🔎 Поиск фильмов!', url='http://f1.ikino.site/index.php?do=search')
             ]]),
         )
+        client.send_message(
+            'filmyserial',
+            text[0],
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton('🎥 Смотреть онлайн!', url=text[1]),
+                InlineKeyboardButton('🔎 Поиск фильмов!', url='http://f1.ikino.site/index.php?do=search')
+            ]]),
+        )
 
 
 app2.run()
