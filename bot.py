@@ -14,7 +14,7 @@ app2 = Client(
 
 @app2.on_message(Filters.regex('http'))
 def post(client, message):
-    if message.chat.username == 'screlizer':
+    if message.chat.username == 'some_name':
         url = message.text
         text = custom_utils.parsing(url)
         client.send_message(
@@ -22,7 +22,7 @@ def post(client, message):
             text[0],
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton('🎥 Смотреть онлайн!', url=text[1]),
-                InlineKeyboardButton('🔎 Поиск фильмов!', url='http://f1.ikino.site/index.php?do=search')
+                InlineKeyboardButton('🔎 Поиск фильмов!', url='some_url')
             ]]),
         )
         client.send_message(
@@ -30,7 +30,7 @@ def post(client, message):
             text[0],
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton('🎥 Смотреть онлайн!', url=text[1]),
-                InlineKeyboardButton('🔎 Поиск фильмов!', url='http://f1.ikino.site/index.php?do=search')
+                InlineKeyboardButton('🔎 Поиск фильмов!', url='some_url')
             ]]),
         )
 
