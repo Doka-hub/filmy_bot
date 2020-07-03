@@ -14,19 +14,11 @@ app2 = Client(
 
 @app2.on_message(Filters.regex('http'))
 def post(client, message):
-    if message.chat.username == 'some_name':
+    if message.chat.username == config('username'):
         url = message.text
         text = custom_utils.parsing(url)
         client.send_message(
-            'filmy',
-            text[0],
-            reply_markup=InlineKeyboardMarkup([[
-                InlineKeyboardButton('🎥 Смотреть онлайн!', url=text[1]),
-                InlineKeyboardButton('🔎 Поиск фильмов!', url='some_url')
-            ]]),
-        )
-        client.send_message(
-            'filmyserial',
+            config('channel'),
             text[0],
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton('🎥 Смотреть онлайн!', url=text[1]),
@@ -36,4 +28,3 @@ def post(client, message):
 
 
 app2.run()
-
