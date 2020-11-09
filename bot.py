@@ -1,30 +1,21 @@
-from pyrogram import Client, Filters, InlineKeyboardMarkup, InlineKeyboardButton
-import custom_utils
-import os
-from decouple import config
+from pyrogram import Client, Filters
+from pyrogram.client.types import Message
+
+from utils import parsing, get_inline_keyboard
+
+from data import API_ID, API_HASH, BOT_TOKEN, ADMIN, CHANNEL_ID
 
 
-app2 = Client(
-    'filmy_bot',
-    api_id=config('api_id'),
-    api_hash=config('api_hash'),
-    bot_token=config('bot_token')
-)
+bot = Client('example', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 
-@app2.on_message(Filters.regex('http'))
-def post(client, message):
-    if message.chat.username == config('username'):
-        url = message.text
-        text = custom_utils.parsing(url)
-        client.send_message(
-            config('channel'),
-            text[0],
-            reply_markup=InlineKeyboardMarkup([[
-                InlineKeyboardButton('🎥 Смотреть онлайн!', url=text[1]),
-                InlineKeyboardButton('🔎 Поиск фильмов!', url='some_url')
-            ]]),
-        )
+@bot.on_message(Filters.regex('http') & Filters.user == ADMIN)
+def post(client: Client, message: Message) -> None:
+    url = message.text
+    text, url = parsing(url)
+    inline_keyboard = get_inline_keyboard(url)
+
+    client.send_message(CHANNEL_ID, text, reply_markup=inline_keyboard)
 
 
-app2.run()
+bot.run()

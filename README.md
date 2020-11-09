@@ -19,11 +19,11 @@ pip install -r requitements.txt
   ```
   ### .env
   ```
-  api_id=TELEGRAM_API_ID
-  api_hash=TELEGRAM_API_HASH
-  bot_token=BOT_TOKEN
-  username=USERNAME
-  channel=CHANNEL
+  API_ID=TELEGRAM_API_ID
+  API_HASH=TELEGRAM_API_HASH
+  BOT_TOKEN=BOT_TOKEN
+  ADMIN=ADMIN_USERNAME
+  CHANNEL=CHANNEL_ID
   ```
 # RUN
 ```python bot.py```
